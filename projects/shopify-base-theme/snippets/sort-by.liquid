@@ -1,0 +1,6 @@
+<h3>sort by: </h3>
+<select id='sort-by'>
+    {% for option in collection.sort_options %}
+        <option value="{{shop.url}}{{collection.url}}?sort_by={{option.value}}">{{option.name}}</option>
+    {% endfor %}
+</select>

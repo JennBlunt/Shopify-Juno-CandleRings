@@ -1,0 +1,49 @@
+{% assign break_at = 4 %}
+{% assign product_id = product.id %}
+
+<div class='related-title'>
+    <h2>{{section.settings.related_title}}</h2>
+</div>
+
+<div class='related-product-list'>
+    {% if product.collections %}
+        {% for collection in product.collections %}
+            {% for product in collection.products %}
+                {% unless product.id == product_id%}
+
+                    <figure class='related-product'>
+                        <a href="{{product.url}}">
+                            <img src="{{product.featured_image | img_url: '250x250' }}" alt="{{product.featured_image.alt}}">
+                            <figcaption>
+                                <h3>{{product.title}}</h3>
+                                <p>{{product.price | money}}</p>
+                            </figcaption>
+                        </a>
+                    </figure>
+
+                {% endunless %}
+
+                {% assign counter = counter | plus: 1 %}
+                {% if counter == break_at %}
+                    {% break %}
+                {% endif %}
+
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+
+{% schema %}  
+{
+    "name": "RelatedProducts",
+    "settings": [
+        {
+            "type": "text",
+            "id": "related_title",
+            "label": "Related Products Title"
+        }
+
+    ]
+}
+{% endschema %}

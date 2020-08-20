@@ -1,0 +1,61 @@
+<section class='img-left-con-right'>
+
+    <img class='block-image' src="{{section.settings.image_left | img_url: '400x'}}" alt={{section.settings.image_left.alt}} > 
+
+    <div class='block_content block_content-right'>
+        {%  for  block in section.blocks %}
+            {% if block.type == "text" or block.type == "textarea" %}
+                <h1>{{block.settings.headline}}</h1>
+                <p>{{block.settings.discription}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</section>
+
+{% schema %}
+{
+    "name": "Image Left, Content Right",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image_left",
+            "label": "Image"
+        }
+    ],
+    "blocks":[
+        {
+         "type":"text",
+         "name": "Add Headline",
+         "settings": [
+           {
+             "type": "text",
+             "id": "headline",
+             "label": "Headline"
+           }
+         ] 
+        },
+
+        {
+          "type": "textarea",
+          "name": "Add Disciption",
+          "settings":[
+            {
+              "type": "textarea",
+              "id": "discription",
+              "label": "Add discription"
+            }
+          ]
+        }
+      ],
+    "presets": [
+        {
+            "name": "Image left, Content right",
+            "category": "About"
+        }
+    ]
+}
+
+{% endschema %}
+
+
